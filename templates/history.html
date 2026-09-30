@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}
+Recommendation History - PocketSmart AI
+{% endblock %}
+
+
+{% block content %}
+
+<main class="history-page">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <span class="badge">
+                Saved Recommendations
+            </span>
+
+            <h1>
+                Recommendation History
+            </h1>
+
+            <p>
+                Review your previous PocketSmart AI plans.
+            </p>
+
+        </div>
+
+        <a
+            href="/dashboard"
+            class="secondary-button"
+        >
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    {% if history %}
+
+
+        <div class="history-list">
+
+            {% for item in history %}
+
+            <div class="history-card">
+
+
+                <div class="history-top">
+
+                    <div>
+
+                        {% if item.planner == "Home Interior" %}
+
+                            <span class="history-icon">
+                                🏠
+                            </span>
+
+                        {% elif item.planner == "Party" %}
+
+                            <span class="history-icon">
+                                🎉
+                            </span>
+
+                        {% else %}
+
+                            <span class="history-icon">
+                                💎
+                            </span>
+
+                        {% endif %}
+
+                        <strong>
+                            {{ item.planner }}
+                        </strong>
+
+                    </div>
+
+
+                    <span>
+                        {{ item.date }}
+                    </span>
+
+                </div>
+
+
+                <div class="history-budget">
+
+                    <span>
+                        Budget:
+                        <strong>
+                            ₹{{ "%.0f"|format(item.budget) }}
+                        </strong>
+                    </span>
+
+                    <span>
+                        Planned:
+                        <strong>
+                            ₹{{ "%.0f"|format(item.estimated_total) }}
+                        </strong>
+                    </span>
+
+                </div>
+
+
+                <details>
+
+                    <summary>
+                        View Recommendation
+                    </summary>
+
+                    <pre>
+{{ item.recommendation }}
+                    </pre>
+
+                </details>
+
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <div>
+                📭
+            </div>
+
+            <h2>
+                No recommendations yet
+            </h2>
+
+            <p>
+                Create your first AI-powered plan.
+            </p>
+
+            <a
+                href="/dashboard"
+                class="primary-button"
+            >
+                Start Planning
+            </a>
+
+        </div>
+
+    {% endif %}
+
+
+</main>
+
+{% endblock %}

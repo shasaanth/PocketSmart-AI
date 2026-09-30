@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard - PocketSmart AI
+{% endblock %}
+
+
+{% block content %}
+
+<main class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <span class="badge">
+                AI Budget Assistant
+            </span>
+
+            <h1>
+                Your Dashboard
+            </h1>
+
+            <p>
+                Choose a planner to create your personalized plan.
+            </p>
+
+        </div>
+
+
+        <a href="/history"
+           class="secondary-button">
+
+            📜 View History
+
+        </a>
+
+    </div>
+
+
+    <div class="planner-grid">
+
+
+        <div class="planner-card">
+
+            <div class="planner-icon">
+                🏠
+            </div>
+
+            <h2>
+                Home Interior
+            </h2>
+
+            <p>
+                Create a budget-friendly interior plan
+                for your room.
+            </p>
+
+            <ul>
+
+                <li>Furniture</li>
+                <li>Lighting</li>
+                <li>Decor</li>
+                <li>Style recommendations</li>
+
+            </ul>
+
+            <a href="/home-planner"
+               class="primary-button">
+
+                Start Planning →
+
+            </a>
+
+        </div>
+
+
+        <div class="planner-card">
+
+            <div class="planner-icon">
+                🎉
+            </div>
+
+            <h2>
+                Party Planner
+            </h2>
+
+            <p>
+                Plan your event according to your
+                guest count and budget.
+            </p>
+
+            <ul>
+
+                <li>Food</li>
+                <li>Decoration</li>
+                <li>Venue</li>
+                <li>Entertainment</li>
+
+            </ul>
+
+            <a href="/party-planner"
+               class="primary-button">
+
+                Start Planning →
+
+            </a>
+
+        </div>
+
+
+        <div class="planner-card">
+
+            <div class="planner-icon">
+                💎
+            </div>
+
+            <h2>
+                Jewelry Planner
+            </h2>
+
+            <p>
+                Find personalized jewelry ideas
+                for your occasion.
+            </p>
+
+            <ul>
+
+                <li>Occasion</li>
+                <li>Style</li>
+                <li>Budget</li>
+                <li>Visual inspiration</li>
+
+            </ul>
+
+            <a href="/jewelry-planner"
+               class="primary-button">
+
+                Start Planning →
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+{% endblock %}

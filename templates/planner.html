@@ -1,0 +1,527 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ planner }} - PocketSmart AI
+{% endblock %}
+
+
+{% block content %}
+
+<main class="planner-page">
+
+    <div class="planner-header">
+
+        {% if planner == "Home Interior" %}
+
+            <div class="large-icon">
+                🏠
+            </div>
+
+            <h1>
+                Home Interior Planner
+            </h1>
+
+            <p>
+                Design your space within your budget.
+            </p>
+
+        {% elif planner == "Party" %}
+
+            <div class="large-icon">
+                🎉
+            </div>
+
+            <h1>
+                Party Planner
+            </h1>
+
+            <p>
+                Plan your event without exceeding your budget.
+            </p>
+
+        {% else %}
+
+            <div class="large-icon">
+                💎
+            </div>
+
+            <h1>
+                Jewelry Planner
+            </h1>
+
+            <p>
+                Find personalized jewelry recommendations.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+    {% if error %}
+
+    <div class="error-message planner-error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <div class="form-card">
+
+
+        {% if planner == "Home Interior" %}
+
+        <form
+            action="/generate-home"
+            method="post"
+            enctype="multipart/form-data"
+            class="planner-form"
+        >
+
+
+            <label>
+                Total Budget (₹)
+            </label>
+
+            <input
+                type="number"
+                name="budget"
+                placeholder="Example: 50000"
+                min="1"
+                required
+            >
+
+
+            <label>
+                Room Type
+            </label>
+
+            <select name="room" required>
+
+                <option value="">
+                    Select a room
+                </option>
+
+                <option>
+                    Living Room
+                </option>
+
+                <option>
+                    Bedroom
+                </option>
+
+                <option>
+                    Kitchen
+                </option>
+
+                <option>
+                    Dining Room
+                </option>
+
+                <option>
+                    Multiple Rooms
+                </option>
+
+            </select>
+
+
+            <div class="two-column">
+
+                <div>
+
+                    <label>
+                        Number of Lights
+                    </label>
+
+                    <input
+                        type="number"
+                        name="lights"
+                        value="2"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Number of Ceiling Fans
+                    </label>
+
+                    <input
+                        type="number"
+                        name="fans"
+                        value="1"
+                        min="0"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <label>
+                Furniture Required
+            </label>
+
+            <input
+                type="text"
+                name="furniture"
+                placeholder="Sofa, table, TV unit..."
+            >
+
+
+            <label>
+                Preferred Style
+            </label>
+
+            <select name="style">
+
+                <option>
+                    Modern
+                </option>
+
+                <option>
+                    Minimalist
+                </option>
+
+                <option>
+                    Traditional
+                </option>
+
+                <option>
+                    Luxury
+                </option>
+
+            </select>
+
+
+            <label>
+                Additional Requirements
+            </label>
+
+            <textarea
+                name="requirements"
+                rows="4"
+                placeholder="Tell us anything else you need..."
+            ></textarea>
+
+
+            <label>
+                Optional Image
+            </label>
+
+            <input
+                type="file"
+                name="image"
+                accept="image/jpeg,image/png,image/webp"
+                class="image-input"
+            >
+
+            <small>
+                Upload a room image for visual AI recommendations.
+                Maximum 5 MB.
+            </small>
+
+
+            <div id="image-preview"
+                 class="image-preview">
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button full-width"
+            >
+                🤖 Generate AI Recommendations
+            </button>
+
+        </form>
+
+
+        {% elif planner == "Party" %}
+
+
+        <form
+            action="/generate-party"
+            method="post"
+            enctype="multipart/form-data"
+            class="planner-form"
+        >
+
+
+            <label>
+                Total Budget (₹)
+            </label>
+
+            <input
+                type="number"
+                name="budget"
+                placeholder="Example: 30000"
+                min="1"
+                required
+            >
+
+
+            <label>
+                Number of Guests
+            </label>
+
+            <input
+                type="number"
+                name="guests"
+                placeholder="Example: 30"
+                min="1"
+                required
+            >
+
+
+            <label>
+                Event Type
+            </label>
+
+            <select name="event_type" required>
+
+                <option value="">
+                    Select event type
+                </option>
+
+                <option>
+                    Birthday
+                </option>
+
+                <option>
+                    Wedding
+                </option>
+
+                <option>
+                    Engagement
+                </option>
+
+                <option>
+                    Anniversary
+                </option>
+
+                <option>
+                    College Event
+                </option>
+
+                <option>
+                    Corporate Event
+                </option>
+
+                <option>
+                    Other
+                </option>
+
+            </select>
+
+
+            <label>
+                Venue
+            </label>
+
+            <input
+                type="text"
+                name="venue"
+                placeholder="Home, hotel, hall..."
+            >
+
+
+            <label>
+                Additional Requirements
+            </label>
+
+            <textarea
+                name="requirements"
+                rows="4"
+                placeholder="Vegetarian food, simple decoration, music..."
+            ></textarea>
+
+
+            <label>
+                Optional Image
+            </label>
+
+            <input
+                type="file"
+                name="image"
+                accept="image/jpeg,image/png,image/webp"
+                class="image-input"
+            >
+
+            <small>
+                Upload an inspiration image if required.
+                Maximum 5 MB.
+            </small>
+
+
+            <div id="image-preview"
+                 class="image-preview">
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button full-width"
+            >
+                🤖 Generate AI Recommendations
+            </button>
+
+        </form>
+
+
+        {% else %}
+
+
+        <form
+            action="/generate-jewelry"
+            method="post"
+            enctype="multipart/form-data"
+            class="planner-form"
+        >
+
+
+            <label>
+                Total Budget (₹)
+            </label>
+
+            <input
+                type="number"
+                name="budget"
+                placeholder="Example: 50000"
+                min="1"
+                required
+            >
+
+
+            <label>
+                Occasion
+            </label>
+
+            <select name="occasion" required>
+
+                <option value="">
+                    Select occasion
+                </option>
+
+                <option>
+                    Wedding
+                </option>
+
+                <option>
+                    Engagement
+                </option>
+
+                <option>
+                    Birthday
+                </option>
+
+                <option>
+                    Anniversary
+                </option>
+
+                <option>
+                    Festival
+                </option>
+
+                <option>
+                    Daily Wear
+                </option>
+
+                <option>
+                    Other
+                </option>
+
+            </select>
+
+
+            <label>
+                Preferred Style
+            </label>
+
+            <select name="style" required>
+
+                <option value="">
+                    Select style
+                </option>
+
+                <option>
+                    Traditional
+                </option>
+
+                <option>
+                    Modern
+                </option>
+
+                <option>
+                    Minimalist
+                </option>
+
+                <option>
+                    Bridal
+                </option>
+
+                <option>
+                    Elegant
+                </option>
+
+                <option>
+                    Statement
+                </option>
+
+            </select>
+
+
+            <label>
+                Additional Requirements
+            </label>
+
+            <textarea
+                name="requirements"
+                rows="4"
+                placeholder="Gold, diamond, lightweight, matching outfit..."
+            ></textarea>
+
+
+            <label>
+                Optional Image
+            </label>
+
+            <input
+                type="file"
+                name="image"
+                accept="image/jpeg,image/png,image/webp"
+                class="image-input"
+            >
+
+            <small>
+                Upload a jewelry inspiration image.
+                Maximum 5 MB.
+            </small>
+
+
+            <div id="image-preview"
+                 class="image-preview">
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button full-width"
+            >
+                🤖 Generate AI Recommendations
+            </button>
+
+        </form>
+
+        {% endif %}
+
+
+    </div>
+
+</main>
+
+{% endblock %}

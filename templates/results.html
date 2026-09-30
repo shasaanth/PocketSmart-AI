@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+
+{% block title %}
+AI Recommendations - PocketSmart AI
+{% endblock %}
+
+
+{% block content %}
+
+<main class="results-page">
+
+
+    <div class="results-header">
+
+        {% if planner == "Home Interior" %}
+
+            <span class="large-icon">
+                🏠
+            </span>
+
+            <h1>
+                Home Interior Recommendations
+            </h1>
+
+        {% elif planner == "Party" %}
+
+            <span class="large-icon">
+                🎉
+            </span>
+
+            <h1>
+                Party Recommendations
+            </h1>
+
+        {% else %}
+
+            <span class="large-icon">
+                💎
+            </span>
+
+            <h1>
+                Jewelry Recommendations
+            </h1>
+
+        {% endif %}
+
+        <p>
+            Personalized by PocketSmart AI
+        </p>
+
+    </div>
+
+
+    {% if image_url %}
+
+    <div class="uploaded-image-card">
+
+        <h3>
+            📷 Uploaded Image
+        </h3>
+
+        <img
+            src="{{ image_url }}"
+            alt="Uploaded inspiration"
+        >
+
+    </div>
+
+    {% endif %}
+
+
+    <div class="result-grid">
+
+
+        <div class="result-card">
+
+            <h2>
+                📋 Your Requirements
+            </h2>
+
+
+            <div class="summary-list">
+
+                {% for key, value in fields.items() %}
+
+                    {% if value %}
+
+                    <div class="summary-row">
+
+                        <strong>
+                            {{ key | replace("_", " ") | title }}
+                        </strong>
+
+                        <span>
+                            {{ value }}
+                        </span>
+
+                    </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="result-card budget-card">
+
+            <h2>
+                💰 Budget
+            </h2>
+
+            <div class="budget-number">
+                ₹{{ "%.0f"|format(budget) }}
+            </div>
+
+            <p>
+                Total Planned Budget
+            </p>
+
+
+            <hr>
+
+
+            <div class="remaining">
+
+                <span>
+                    Remaining Budget
+                </span>
+
+                <strong>
+                    ₹{{ "%.0f"|format(remaining_budget) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="result-card">
+
+        <h2>
+            💰 Budget Allocation
+        </h2>
+
+
+        <div class="budget-table">
+
+            {% for item in budget_plan.breakdown %}
+
+            <div class="budget-row">
+
+                <span>
+                    {{ item.name }}
+                </span>
+
+                <span>
+                    {{ item.percentage }}%
+                </span>
+
+                <strong>
+                    ₹{{ "%.0f"|format(item.amount) }}
+                </strong>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <div class="ai-card">
+
+        <div class="ai-heading">
+
+            <span>
+                🤖
+            </span>
+
+            <div>
+
+                <h2>
+                    Gemini AI Recommendation
+                </h2>
+
+                <p>
+                    Personalized according to your requirements.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="ai-response">
+
+            <pre>{{ recommendation }}</pre>
+
+        </div>
+
+    </div>
+
+
+    <div class="result-actions">
+
+        {% if planner == "Home Interior" %}
+
+            <a
+                href="/home-planner"
+                class="secondary-button"
+            >
+                ← Plan Again
+            </a>
+
+        {% elif planner == "Party" %}
+
+            <a
+                href="/party-planner"
+                class="secondary-button"
+            >
+                ← Plan Again
+            </a>
+
+        {% else %}
+
+            <a
+                href="/jewelry-planner"
+                class="secondary-button"
+            >
+                ← Plan Again
+            </a>
+
+        {% endif %}
+
+
+        <a
+            href="/history"
+            class="primary-button"
+        >
+            📜 View History
+        </a>
+
+    </div>
+
+
+</main>
+
+{% endblock %}

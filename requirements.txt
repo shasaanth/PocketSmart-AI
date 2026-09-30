@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+python-dotenv
+google-genai
+jinja2
+python-multipart
+pillow
+itsdangerous

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}PocketSmart AI{% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <a href="/" class="logo">
+        PocketSmart AI
+    </a>
+
+    <div class="nav-links">
+
+        {% if user %}
+
+            <a href="/dashboard">Dashboard</a>
+
+            <a href="/history">History</a>
+
+            <a href="/logout">Logout</a>
+
+        {% else %}
+
+            <a href="/login">Login</a>
+
+            <a href="/register" class="nav-button">
+                Register
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+{% if user %}
+
+<div class="welcome-bar">
+
+    Welcome,
+    <strong>{{ user.name }}</strong>
+
+</div>
+
+{% endif %}
+
+
+{% block content %}
+
+{% endblock %}
+
+
+<script src="{{ url_for('static', path='js/script.js') }}"></script>
+
+</body>
+
+</html>
