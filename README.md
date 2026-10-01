@@ -153,3 +153,24 @@ Previous AI-generated recommendations can be stored and viewed through the Histo
                 │ Recommendation       │
                 │ History              │
                 └──────────────────────┘
+
+
+## Screenshots
+
+### Home Page
+![Home Page](static/screenshots/home.png)
+
+### Dashboard
+![Dashboard](static/screenshots/dashboard.png)
+
+### Home Planner
+![Home Planner](static/screenshots/home-planner.png)
+
+### Party Recommendation
+![Party Recommendation](static/screenshots/party-result.png)
+
+### Jewelry Planner
+![Jewelry Planner](static/screenshots/jewelry-planner.png)
+
+### Recommendation History
+![History](static/screenshots/history.png)
